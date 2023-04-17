@@ -45,7 +45,7 @@ function App() {
             onCardClick={setSelectedCard}/>
       <Footer/>
       <PopupWithForm title="Редактировать профиль" name="profile-edit" isOpen={isEditProfilePopupOpen}
-                     onClose={closeAllPopups}>
+                     onClose={closeAllPopups} submitName="Сохранить">
         <div className="popup__field">
           <input type="text" name="nameInput" id="name-input" placeholder="Имя"
                  className="popup__input popup__input_el_name"
@@ -60,7 +60,8 @@ function App() {
           <span className="popup__form-input-error about-input-error"></span>
         </div>
       </PopupWithForm>
-      <PopupWithForm title="Новое место" name="add-image" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm title="Новое место" name="add-image" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}
+                     submitName="Создать">
         <div className="popup__field">
           <input type="text" name="imageName" id="input-image-name" placeholder="Название"
                  className="popup__input popup__input_el_image-name"
@@ -74,14 +75,14 @@ function App() {
         </div>
       </PopupWithForm>
       <PopupWithForm title="Обновить аватар" name="update-avatar" isOpen={isEditAvatarPopupOpen}
-                     onClose={closeAllPopups}>
+                     onClose={closeAllPopups} submitName="Сохранить">
         <div className="popup__field">
           <input type="url" name="avatarLink" id="input-avatar-link" placeholder="Ссылка на аватар"
                  className="popup__input popup__input_el_avatar-link" required/>
           <span className="popup__form-input-error input-avatar-link-error"></span>
         </div>
       </PopupWithForm>
-      <PopupWithForm title="Вы уверены?" name="confirm" isOpen={false} onClose={closeAllPopups}/>
+      <PopupWithForm title="Вы уверены?" name="confirm" isOpen={false} onClose={closeAllPopups} submitName="Да"/>
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
     </div>
   );

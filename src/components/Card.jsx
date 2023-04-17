@@ -20,7 +20,7 @@ function Card({card, onCardClick}) {
             <p className="element__like-counter">{card.likes.length}</p>
           </div>
         </div>
-        <button type="button" className="element__button-trash button-opacity"></button>
+        <button type="button" className="element__button-trash button-opacity"/>
       </article>
     </li>
   )
