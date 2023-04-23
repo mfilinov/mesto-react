@@ -9,9 +9,14 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar, onOverlayClick}) {
     onUpdateAvatar(avatarRef.current.value);
   }
 
+  function closePopupAndCleanInput() {
+    avatarRef.current.value = "";
+    onClose();
+  }
+
   return (
     <PopupWithForm title="Обновить аватар" name="update-avatar" isOpen={isOpen}
-                   onClose={onClose} submitName="Сохранить" onSubmit={handleSubmit}
+                   onClose={closePopupAndCleanInput} submitName="Сохранить" onSubmit={handleSubmit}
                    onOverlayClick={onOverlayClick} isSubmitDisabled={false}>
       <div className="popup__field">
         <input ref={avatarRef} type="url" name="avatarLink" id="input-avatar-link" placeholder="Ссылка на аватар"

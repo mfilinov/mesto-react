@@ -1,4 +1,4 @@
-import React from "react";
+import {useEffect, useState} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
@@ -11,26 +11,26 @@ import AddPlacePopup from "./AddPlacePopup";
 import ConfirmPopup from "./ConfirmPopup";
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [deletionCardPopupOpen, setDeletionCardPopupOpen] = React.useState({
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [deletionCardPopupOpen, setDeletionCardPopupOpen] = useState({
     isOpen: false,
     element: {}
   });
-  const [selectedCard, setSelectedCard] = React.useState({
+  const [selectedCard, setSelectedCard] = useState({
     isOpen: false,
     element: {}
   });
-  const [currentUser, setCurrentUser] = React.useState({
+  const [currentUser, setCurrentUser] = useState({
     name: "",
     about: "",
     avatar: "",
     id: ""
   });
-  const [cards, setCards] = React.useState([]);
+  const [cards, setCards] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     Promise.all([
         api.getUserInfo(),
         api.getAllCardList()
@@ -114,7 +114,7 @@ function App() {
   function handleUpdateUser(name, about) {
     api.updateUserProfile(name, about)
       .then(({name, about, avatar, _id}) => {
-        setCurrentUser({name: name, about: about, avatar: avatar, id: _id});
+        setCurrentUser({name, about, avatar, id: _id});
         closeAllPopups();
       }).catch(err => console.log(err))
   }
@@ -122,7 +122,7 @@ function App() {
   function handleUpdateAvatar(avatarLink) {
     api.updateProfileAvatar(avatarLink)
       .then(({name, about, avatar, _id}) => {
-        setCurrentUser({name: name, about: about, avatar: avatar, id: _id});
+        setCurrentUser({name, about, avatar, id: _id});
         closeAllPopups();
       }).catch(err => console.log(err));
   }
