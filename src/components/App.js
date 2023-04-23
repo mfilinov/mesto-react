@@ -31,19 +31,22 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    api.getAllCardList()
-      .then(cardListRes => {
+    Promise.all([
+        api.getUserInfo(),
+        api.getAllCardList()
+      ]
+    )
+      .then(([userInfoRes, cardListRes]) => {
+        setCurrentUser({
+          name: userInfoRes.name,
+          about: userInfoRes.about,
+          avatar: userInfoRes.avatar,
+          id: userInfoRes._id
+        })
         setCards(cardListRes);
       })
       .catch(err => console.log(err));
 
-  }, []);
-
-  React.useEffect(() => {
-    api.getUserInfo()
-      .then(({name, about, avatar, _id}) => {
-        setCurrentUser({name: name, about: about, avatar: avatar, id: _id})
-      }).catch(err => console.log(err))
   }, []);
 
   function handleEditAvatarClick() {
